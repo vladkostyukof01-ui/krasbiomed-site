@@ -112,9 +112,17 @@ app.post('/api/admin/login', loginLimiter, (req, res) => {
   if (!verifyAdmin(username, password)) {
     return res.status(401).json({ error: 'Неверный логин или пароль.' });
   }
-  req.session.adminUsername = username;
-  const csrfToken = issueCsrfToken(req);
-  res.json({ ok: true, username, csrfToken });
+  // Регенерация session ID при логине — предотвращает session fixation:
+  // старый (возможно, известный атакующему) ID сессии уничтожается,
+  // выдаётся новый, и уже в нём проставляются поля авторизации.
+  req.session.regenerate((err) => {
+    if (err) {
+      return res.status(500).json({ error: 'Не удалось создать сессию. Попробуйте снова.' });
+    }
+    req.session.adminUsername = username;
+    const csrfToken = issueCsrfToken(req);
+    res.json({ ok: true, username, csrfToken });
+  });
 });
 
 app.post('/api/admin/logout', (req, res) => {
@@ -131,8 +139,8 @@ app.get('/api/admin/me', (req, res) => {
 
 app.post('/api/admin/change-password', requireAuth, (req, res) => {
   const { newPassword } = req.body || {};
-  if (!newPassword || newPassword.length < 6) {
-    return res.status(400).json({ error: 'Пароль должен быть не короче 6 символов.' });
+  if (!newPassword || newPassword.length < 10) {
+    return res.status(400).json({ error: 'Пароль должен быть не короче 10 символов.' });
   }
   changePassword(req.session.adminUsername, newPassword);
   res.json({ ok: true });
@@ -273,7 +281,7 @@ app.get('/uslugi/:slug', (req, res) => {
   const template = fs.readFileSync(path.join(__dirname, '..', 'public', 'usluga-detail.html'), 'utf8');
   const title = escapeHtml(service.title + ' — ООО «КрасБиоМед-Иммуно», Красноярск');
   const description = escapeHtml((service.short_desc || 'Иммунобиологические препараты и вакцинация в Красноярске.')).slice(0, 160);
-  const canonical = `https://ЗАМЕНИТЕ-НА-ДОМЕН.ru/uslugi/${escapeHtml(req.params.slug)}`;
+  const canonical = `https://krasbiomed-site.onrender.com/uslugi/${escapeHtml(req.params.slug)}`;
   const html = template
     .replace('<title id="pageTitle">Услуга — ООО «КрасБиоМед-Иммуно»</title>', `<title id="pageTitle">${title}</title>`)
     .replace(
