@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Оставить заявку — ООО «КрасБиоМед-Иммуно», Красноярск</title>
+<meta name="description" content="Оставьте заявку на вакцинацию, консультацию по препарату или оптовую поставку иммунобиологической продукции — свяжемся с вами по телефону.">
+<link rel="canonical" href="https://ЗАМЕНИТЕ-НА-ДОМЕН.ru/zayavka">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%2310222C'/%3E%3Cpath d='M32 20c-4.5 5.4-7 9.3-7 12.6A7 7 0 0 0 39 32.6c0-3.3-2.5-7.2-7-12.6Z' fill='%23EFF5F7'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<div id="navPlaceholder"></div>
+
+<main>
+  <div class="page-header wrap">
+    <span class="eyebrow">Заявка</span>
+    <h1>Оставить заявку</h1>
+    <p class="lede">Заполните форму — мы свяжемся с вами по телефону, чтобы уточнить детали: вакцинацию, консультацию по препарату или условия оптовой поставки.</p>
+  </div>
+
+  <section class="section" style="padding-top:0;">
+    <div class="wrap">
+      <form class="form-card" id="zayavkaForm">
+        <div class="field">
+          <label for="f_name">Имя</label>
+          <input type="text" id="f_name" name="name" autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="f_phone">Телефон *</label>
+          <input type="tel" id="f_phone" name="phone" autocomplete="tel" required placeholder="+7 (___) ___-__-__">
+        </div>
+        <div class="field">
+          <label for="f_type">Тип обращения</label>
+          <select id="f_type" name="request_type">
+            <option value="Вакцинация в кабинете">Вакцинация в кабинете</option>
+            <option value="Серопрофилактика при укусе клеща">Серопрофилактика при укусе клеща</option>
+            <option value="Выездная вакцинация">Выездная вакцинация</option>
+            <option value="Оптовая поставка">Оптовая поставка (аптека, учреждение)</option>
+            <option value="Другое">Другое / уточню на консультации</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f_org">Организация (для оптовых заявок)</label>
+          <input type="text" id="f_org" name="organization" placeholder="Название аптеки или учреждения — если применимо">
+        </div>
+        <div class="field">
+          <label for="f_message">Сообщение</label>
+          <textarea id="f_message" name="message" placeholder="Например: нужна вакцина от клещевого энцефалита для взрослого"></textarea>
+        </div>
+        <div class="field field-check">
+          <input type="checkbox" id="f_consent" name="consent" required>
+          <label for="f_consent" style="margin:0; font-weight:400;">Согласен(на) на обработку персональных данных в соответствии с <a href="/privacy" target="_blank">политикой обработки персональных данных</a> (152-ФЗ) *</label>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Отправить заявку</button>
+        <p class="form-msg" id="formMsg"></p>
+      </form>
+
+      <div class="disclaimer-box" style="max-width:640px; margin-top:24px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.29 3.86l-8.18 14.18A2 2 0 0 0 3.9 21h16.2a2 2 0 0 0 1.79-2.96L13.71 3.86a2 2 0 0 0-3.42 0Z"/></svg>
+        <p>Имеются противопоказания. Необходима консультация специалиста.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="footerPlaceholder"></div>
+
+<script src="/common.js"></script>
+<script>
+document.getElementById('zayavkaForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const msgEl = document.getElementById('formMsg');
+  msgEl.textContent = '';
+  msgEl.className = 'form-msg';
+  const payload = {
+    name: document.getElementById('f_name').value,
+    phone: document.getElementById('f_phone').value,
+    request_type: document.getElementById('f_type').value,
+    organization: document.getElementById('f_org').value,
+    message: document.getElementById('f_message').value,
+    consent: document.getElementById('f_consent').checked,
+  };
+  try {
+    const res = await fetch('/api/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Ошибка отправки');
+    msgEl.textContent = 'Заявка отправлена. Мы свяжемся с вами в ближайшее время.';
+    msgEl.className = 'form-msg ok';
+    document.getElementById('zayavkaForm').reset();
+  } catch (err) {
+    msgEl.textContent = err.message;
+    msgEl.className = 'form-msg err';
+  }
+});
+</script>
+</body>
+</html>

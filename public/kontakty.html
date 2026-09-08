@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Контакты — ООО «КрасБиоМед-Иммуно», Красноярск</title>
+<meta name="description" content="Адрес, телефон и режим работы ООО «КрасБиоМед-Иммуно»: г. Красноярск, ул. Урицкого, 120, офис 2, (391) 211-07-45.">
+<link rel="canonical" href="https://ЗАМЕНИТЕ-НА-ДОМЕН.ru/kontakty">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%2310222C'/%3E%3Cpath d='M32 20c-4.5 5.4-7 9.3-7 12.6A7 7 0 0 0 39 32.6c0-3.3-2.5-7.2-7-12.6Z' fill='%23EFF5F7'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<div id="navPlaceholder"></div>
+
+<main>
+  <div class="page-header wrap">
+    <span class="eyebrow">Контакты</span>
+    <h1>Как нас найти</h1>
+  </div>
+
+  <section class="section" style="padding-top:0;">
+    <div class="wrap contact-grid">
+      <div>
+        <div class="contact-card">
+          <h4>Адрес</h4>
+          <p class="value" id="addr"></p>
+        </div>
+        <div class="contact-card">
+          <h4>Телефон</h4>
+          <p class="value"><a id="phoneLink" href="#"></a></p>
+          <p style="font-size:0.85rem; color:var(--ink-faint); margin-top:6px;">Дополнительно перед обращением звоните по телефону для уточнения наличия препарата.</p>
+        </div>
+        <div class="contact-card">
+          <h4>Email</h4>
+          <p class="value" style="font-size:1rem;"><a id="emailLink" href="#"></a></p>
+        </div>
+        <div class="contact-card">
+          <h4>Режим работы</h4>
+          <p style="font-size:0.95rem;" id="workHours"></p>
+          <p style="font-size:0.85rem; color:var(--ink-faint); margin-top:6px;" id="workHoursDoctor"></p>
+        </div>
+        <div class="contact-card">
+          <h4>Контролирующие органы</h4>
+          <table class="schedule-table">
+            <tr><td>Минздрав Красноярского края</td><td id="minzdravPhone"></td></tr>
+            <tr><td>Росздравнадзор по краю</td><td id="roszdravPhone"></td></tr>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div class="map-frame">
+          <iframe id="mapFrame" src="" loading="lazy" title="Карта — расположение офиса ООО «КрасБиоМед-Иммуно»"></iframe>
+        </div>
+        <div style="margin-top:24px;">
+          <a href="/zayavka" class="btn btn-primary" style="width:100%; justify-content:center;">Оставить заявку</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="footerPlaceholder"></div>
+
+<script src="/common.js"></script>
+<script>
+async function loadContacts() {
+  const settings = await loadSettingsGlobal();
+  document.getElementById('addr').textContent = settings.legal_address || '';
+  const phoneLink = document.getElementById('phoneLink');
+  phoneLink.textContent = settings.phone_display || settings.phone || '';
+  phoneLink.href = 'tel:' + (settings.phone || '').replace(/[^\d+]/g, '');
+  const emailLink = document.getElementById('emailLink');
+  emailLink.textContent = settings.email || '';
+  emailLink.href = 'mailto:' + (settings.email || '');
+  document.getElementById('workHours').textContent = settings.work_hours || '';
+  document.getElementById('workHoursDoctor').textContent = settings.work_hours_doctor || '';
+  document.getElementById('minzdravPhone').textContent = settings.regulator_minzdrav_phone || '';
+  document.getElementById('roszdravPhone').textContent = settings.regulator_roszdravnadzor_phone || '';
+  document.getElementById('mapFrame').src = settings.map_embed_url || '';
+}
+loadContacts();
+</script>
+</body>
+</html>

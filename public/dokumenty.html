@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Документы и лицензии — ООО «КрасБиоМед-Иммуно», Красноярск</title>
+<meta name="description" content="Лицензии ООО «КрасБиоМед-Иммуно» на медицинскую и фармацевтическую деятельность, реквизиты компании: ИНН, ОГРН, банковские данные.">
+<link rel="canonical" href="https://ЗАМЕНИТЕ-НА-ДОМЕН.ru/dokumenty">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%2310222C'/%3E%3Cpath d='M32 20c-4.5 5.4-7 9.3-7 12.6A7 7 0 0 0 39 32.6c0-3.3-2.5-7.2-7-12.6Z' fill='%23EFF5F7'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<div id="navPlaceholder"></div>
+
+<main>
+  <div class="page-header wrap">
+    <span class="eyebrow">Документы</span>
+    <h1>Лицензии и реквизиты компании</h1>
+    <p class="lede">Полный комплект разрешительных документов и юридических реквизитов ООО «КрасБиоМед-Иммуно».</p>
+  </div>
+
+  <section class="section" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Реквизиты</span>
+        <h2>Юридическая информация</h2>
+      </div>
+      <table class="requisites-table" id="requisitesTable"></table>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Лицензии и свидетельства</span>
+        <h2>Сканы разрешительных документов</h2>
+        <p>Оригиналы можно уточнить в офисе компании по адресу ул. Урицкого, 120.</p>
+      </div>
+      <div class="license-grid" id="licenseGrid"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="disclaimer-box">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.29 3.86l-8.18 14.18A2 2 0 0 0 3.9 21h16.2a2 2 0 0 0 1.79-2.96L13.71 3.86a2 2 0 0 0-3.42 0Z"/></svg>
+        <p>Имеются противопоказания. Необходима консультация специалиста.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="footerPlaceholder"></div>
+
+<script src="/common.js"></script>
+<script>
+async function loadDocs() {
+  const [licenses, settings] = await Promise.all([
+    fetch('/api/licenses').then(r => r.json()),
+    loadSettingsGlobal(),
+  ]);
+  document.getElementById('licenseGrid').innerHTML = licenses.map(l => `
+    <div class="license-item">
+      <img src="${escAttr(l.image)}" alt="${escAttr(l.title)}" loading="lazy">
+      <div class="cap"><strong style="color:var(--ink); font-family:var(--font-body);">${esc(l.title)}</strong><br>${esc(l.caption)}</div>
+    </div>
+  `).join('');
+
+  const rows = [
+    ['Полное наименование', settings.legal_name],
+    ['Юридический адрес', settings.postal_address],
+    ['ИНН', settings.inn],
+    ['КПП', settings.kpp],
+    ['ОГРН', settings.ogrn],
+    ['ОКПО', settings.okpo],
+    ['ОКТМО', settings.oktmo],
+    ['ОКВЭД', settings.okved],
+    ['Расчётный счёт', settings.bank_account],
+    ['Банк', settings.bank_name],
+    ['БИК банка', settings.bank_bik],
+    ['Директор', settings.director_name],
+  ];
+  document.getElementById('requisitesTable').innerHTML = rows.map(([label, value]) => `
+    <tr><td>${esc(label)}</td><td>${esc(value || '[заполнить]')}</td></tr>
+  `).join('');
+}
+loadDocs();
+</script>
+</body>
+</html>

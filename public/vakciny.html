@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Вакцины и цены — ООО «КрасБиоМед-Иммуно», Красноярск</title>
+<meta name="description" content="Прейскурант на вакцинацию в Красноярске: клещевой энцефалит, пневмококковая инфекция, гепатит А и В, ВПЧ, бешенство и другие вакцины с указанием производителя и цены.">
+<link rel="canonical" href="https://ЗАМЕНИТЕ-НА-ДОМЕН.ru/vakciny">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%2310222C'/%3E%3Cpath d='M32 20c-4.5 5.4-7 9.3-7 12.6A7 7 0 0 0 39 32.6c0-3.3-2.5-7.2-7-12.6Z' fill='%23EFF5F7'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<div id="navPlaceholder"></div>
+
+<main>
+  <div class="page-header wrap">
+    <span class="eyebrow">Прейскурант</span>
+    <h1>Вакцины и цены</h1>
+    <p class="lede">Актуально на <span id="priceUpdated"></span>. Медицинская помощь по территориальной программе и программам ОМС не предоставляется — приём платный, по предварительной записи по телефону или e-mail.</p>
+  </div>
+
+  <section class="section" style="padding-top:0;">
+    <div class="wrap">
+      <div class="price-toolbar">
+        <div class="price-search">
+          <input type="text" id="priceSearch" placeholder="Найти вакцину, например «клещ» или «гепатит»…">
+        </div>
+      </div>
+      <div id="priceList"></div>
+      <p style="font-size:0.85rem; color:var(--ink-faint); margin-top:8px;">Позиции с пометкой «нет в наличии» отражают временное отсутствие препарата на момент публикации прейскуранта — уточняйте актуальное наличие по телефону.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Условия приёма</span>
+        <h2>Как записаться на вакцинацию</h2>
+      </div>
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-num"></div>
+          <div>
+            <h3>Позвоните заранее</h3>
+            <p>Уточните наличие нужного препарата по телефону: (391) 211-07-45, 211-45-15, 211-07-20 — или напишите на krasbiomed@mail.ru.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num"></div>
+          <div>
+            <h3>Пройдите осмотр врача</h3>
+            <p>Перед вакцинацией необходим осмотр — его можно пройти в поликлинике по месту жительства по системе ОМС, либо на месте в часы приёма врача.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num"></div>
+          <div>
+            <h3>Возьмите документы</h3>
+            <p>При себе иметь паспорт, амбулаторную карту или выписку из неё, сертификат о профилактических прививках (при наличии).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="disclaimer-box">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.29 3.86l-8.18 14.18A2 2 0 0 0 3.9 21h16.2a2 2 0 0 0 1.79-2.96L13.71 3.86a2 2 0 0 0-3.42 0Z"/></svg>
+        <p>Имеются противопоказания. Необходима консультация специалиста.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="footerPlaceholder"></div>
+
+<script src="/common.js"></script>
+<script>
+let PRICE_DATA = [];
+
+function renderAccordion(data) {
+  const container = document.getElementById('priceList');
+  container.innerHTML = data.map((cat, idx) => `
+    <div class="accordion" data-cat-idx="${idx}">
+      <button class="accordion-head" type="button" data-role="toggle">
+        <div>
+          <h3>${esc(cat.title)}</h3>
+          <span class="meta">${cat.items.length} ${pluralize(cat.items.length)}</span>
+        </div>
+        <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="accordion-body">
+        ${cat.intro ? `<p class="accordion-intro">${esc(cat.intro)}</p>` : ''}
+        <table class="price-table">
+          ${cat.items.map(item => `
+            <tr>
+              <td class="p-title">${esc(item.title)}${item.dose_note ? `<span class="p-sub">${esc(item.dose_note)}</span>` : ''}</td>
+              <td class="p-maker">${esc(item.manufacturer || '')}</td>
+              <td class="p-price ${item.in_stock ? '' : 'is-out'}">${esc(item.price_note)}</td>
+            </tr>
+          `).join('')}
+        </table>
+      </div>
+    </div>
+  `).join('');
+
+  container.querySelectorAll('.accordion-head').forEach(head => {
+    head.addEventListener('click', () => {
+      head.closest('.accordion').classList.toggle('is-open');
+    });
+  });
+}
+
+function pluralize(n) {
+  const mod10 = n % 10, mod100 = n % 100;
+  if (mod10 === 1 && mod100 !== 11) return 'препарат';
+  if ([2, 3, 4].includes(mod10) && ![12, 13, 14].includes(mod100)) return 'препарата';
+  return 'препаратов';
+}
+
+async function loadPrices() {
+  const [data, settings] = await Promise.all([
+    fetch('/api/price-index').then(r => r.json()),
+    loadSettingsGlobal(),
+  ]);
+  PRICE_DATA = data;
+  renderAccordion(PRICE_DATA);
+  document.getElementById('priceUpdated').textContent = settings.price_updated_at || '';
+  // Открыть первый раздел по умолчанию
+  const first = document.querySelector('.accordion');
+  if (first) first.classList.add('is-open');
+}
+loadPrices();
+
+document.getElementById('priceSearch').addEventListener('input', (e) => {
+  const q = e.target.value.trim().toLowerCase();
+  if (!q) { renderAccordion(PRICE_DATA); return; }
+  const filtered = PRICE_DATA
+    .map(cat => ({
+      ...cat,
+      items: cat.items.filter(item =>
+        item.title.toLowerCase().includes(q) ||
+        (item.manufacturer || '').toLowerCase().includes(q) ||
+        cat.title.toLowerCase().includes(q)
+      ),
+    }))
+    .filter(cat => cat.items.length > 0);
+  renderAccordion(filtered);
+  document.querySelectorAll('.accordion').forEach(a => a.classList.add('is-open'));
+});
+</script>
+</body>
+</html>

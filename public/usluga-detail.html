@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">Услуга — ООО «КрасБиоМед-Иммуно»</title>
+<meta name="description" id="pageDescription" content="Иммунобиологические препараты и вакцинация в Красноярске.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%2310222C'/%3E%3Cpath d='M32 20c-4.5 5.4-7 9.3-7 12.6A7 7 0 0 0 39 32.6c0-3.3-2.5-7.2-7-12.6Z' fill='%23EFF5F7'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<div id="navPlaceholder"></div>
+
+<main>
+  <div class="page-header wrap">
+    <div class="breadcrumb"><a href="/uslugi">Услуги</a> / <span id="crumbTitle"></span></div>
+    <span class="eyebrow">Услуга</span>
+    <h1 id="svcTitle"></h1>
+    <p class="lede" id="svcShort"></p>
+  </div>
+
+  <section class="section" style="padding-top:0;">
+    <div class="wrap split-layout">
+      <div class="body-rich" id="svcBody"></div>
+      <div class="form-card" style="padding:28px; box-shadow:none; background:var(--accent-soft); border:none;">
+        <h3 style="margin-bottom:14px;">Остались вопросы?</h3>
+        <p style="color:var(--ink-soft); margin-bottom:18px;">Оставьте заявку — уточним детали и свяжемся с вами.</p>
+        <a href="/zayavka" class="btn btn-primary" style="width:100%; justify-content:center;">Оставить заявку</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="disclaimer-box">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.29 3.86l-8.18 14.18A2 2 0 0 0 3.9 21h16.2a2 2 0 0 0 1.79-2.96L13.71 3.86a2 2 0 0 0-3.42 0Z"/></svg>
+        <p>Имеются противопоказания. Необходима консультация специалиста.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="footerPlaceholder"></div>
+
+<script src="/common.js"></script>
+<script>
+async function loadService() {
+  const slug = window.location.pathname.split('/').pop();
+  try {
+    const res = await fetch('/api/services/' + slug);
+    if (!res.ok) throw new Error('not found');
+    const svc = await res.json();
+    document.getElementById('svcTitle').textContent = svc.title;
+    document.getElementById('crumbTitle').textContent = svc.title;
+    document.getElementById('svcShort').textContent = svc.short_desc;
+    document.getElementById('svcBody').innerHTML = (svc.body || '').split('\n').filter(Boolean).map(p => `<p>${esc(p)}</p>`).join('');
+    document.title = svc.title + ' — ООО «КрасБиоМед-Иммуно», Красноярск';
+  } catch (err) {
+    document.getElementById('svcTitle').textContent = 'Услуга не найдена';
+  }
+}
+loadService();
+</script>
+</body>
+</html>

@@ -1,0 +1,395 @@
+/* ============================================================
+   ООО «КРАСБИОМЕД-ИММУНО» — эстетика «Холодовая цепь».
+
+   НАПРАВЛЕНИЕ: компания с 2005 года поставляет медицинские
+   иммунобиологические препараты (вакцины, иммуноглобулины,
+   бактериофаги, аллергены, сыворотки) и ведёт собственный
+   прививочный кабинет в Красноярске. Ключевое слово, которое сама
+   компания использует на сайте — «холодовая цепь»: вакцины должны
+   храниться и перевозиться в строгом температурном диапазоне
+   (+2°C…+8°C) на всём пути от производителя до пациента, иначе
+   теряют активность. Это специфический, не клишированный мотив
+   именно для дистрибьютора биопрепаратов — в отличие от банальной
+   ДНК-спирали или пробирки. Графический язык строится на:
+     — «индикаторе холодовой цепи» — вертикальной температурной
+       шкале с делениями и подсвеченной безопасной зоной (+2…+8),
+       как на настоящих термоиндикаторах на упаковках вакцин;
+     — цепочке контрольных точек (производитель → термобокс →
+       склад → прививочный кабинет/аптека → пациент) — узлы,
+       соединённые пунктиром, обозначающие непрерывность контроля;
+     — сетке ампул/капель как фоновой текстуре разделителей.
+   Это НЕ тил/чернильный (занято «Профилем глубины» у Аква96), НЕ
+   сеть линий (занято «Меридианом»), НЕ гониометр (занято «Осью
+   движения»), НЕ дуга рассвета (занято «Тихим светом»), НЕ paper/
+   dossier (Монолит) и НЕ индиго/янтарь-тикер (Бегучка).
+
+   ПАЛИТРА — построена вокруг физического индикатора холодовой цепи:
+     --ink        #10222C  — глубокий сине-угольный, цвет вечернего
+                              термоконтейнера/маркировки Rx
+     --frost      #EFF5F7  — морозно-белый, цвет упаковки вакцины
+     --frost-deep #DCE9ED  — вторичный морозный фон карточек-полос
+     --cold       #4A7A94  — приглушённый холодный сине-серый —
+                              «безопасная зона» индикатора (+2…+8°C),
+                              холоднее и серее бирюзы Аква96
+     --cold-deep  #2F5A73  — глубокий вариант для текста/акцентов
+     --amber      #E8A33D  — тёплый янтарь предупреждающей наклейки
+                              на термоконтейнере — акцент CTA
+     --alert      #C1443A  — редкий сигнал угрозы разморозки/
+                              просрочки — только для дисклеймера
+   Ничего не заимствовано из старого сайта — палитра построена
+   заново под специфику температурного контроля биопрепаратов.
+
+   ШРИФТЫ: 'Fraunces' — контрастный serif с "печатным" характером
+   для заголовков (выразительнее нейтрального Newsreader, не
+   конфликтует по ощущению с уже занятыми гарнитурами). 'Inter' —
+   нейтральный гротеск для текста и интерфейса. 'JetBrains Mono' —
+   моноширинный для температур, номеров лицензий, доз и цен —
+   подчёркивает лабораторную точность.
+   ============================================================ */
+:root {
+  --ink: #10222C;
+  --ink-soft: #47606C;
+  --ink-faint: #7D95A0;
+  --frost: #EFF5F7;
+  --frost-deep: #DCE9ED;
+  --card: #FFFFFF;
+  --line: rgba(16, 34, 44, 0.12);
+  --line-strong: rgba(16, 34, 44, 0.30);
+
+  --cold: #4A7A94;
+  --cold-deep: #2F5A73;
+  --cold-soft: #E1EDF1;
+  --amber: #E8A33D;
+  --amber-deep: #B87D22;
+  --amber-soft: #FBEDD8;
+  --alert: #C1443A;
+  --alert-deep: #9B342C;
+  --alert-soft: #F8E0DD;
+
+  --accent: var(--cold-deep);
+  --accent-soft: var(--cold-soft);
+  --signal: var(--amber);
+  --signal-deep: var(--amber-deep);
+  --signal-soft: var(--amber-soft);
+
+  --shadow: 0 18px 44px rgba(16, 34, 44, 0.14);
+  --radius: 12px;
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Courier New', monospace;
+}
+
+:root { color-scheme: light; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { overflow-x: hidden; }
+img, svg { display: block; max-width: 100%; }
+.trust-grid, .services-grid, .discount-list, .contact-grid, .license-grid, .chain-steps, .footer-inner { min-width: 0; }
+.trust-grid > *, .services-grid > *, .discount-list > *, .contact-grid > *, .license-grid > *, .chain-steps > *, .footer-inner > * { min-width: 0; }
+button { appearance: none; -webkit-appearance: none; font: inherit; background: none; border: none; cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+html { scroll-behavior: smooth; }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--frost);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16.5px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+main { flex: 1 0 auto; }
+
+h1, h2, h3 { font-family: var(--font-display); font-weight: 600; color: var(--ink); text-wrap: balance; line-height: 1.15; overflow-wrap: break-word; }
+h1 { font-size: clamp(2.2rem, 4.6vw, 3.6rem); letter-spacing: -0.01em; font-optical-sizing: auto; }
+h2 { font-size: clamp(1.55rem, 2.7vw, 2.2rem); }
+h3 { font-size: 1.28rem; }
+p { color: var(--ink-soft); }
+.wrap { width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+.mono { font-family: var(--font-mono); }
+
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.13em;
+  color: var(--cold-deep); font-weight: 600; margin-bottom: 14px;
+  font-family: var(--font-mono);
+}
+.eyebrow::before { content: ''; width: 16px; height: 1.5px; background: var(--cold); }
+
+/* ---------------- ИНДИКАТОР ХОЛОДОВОЙ ЦЕПИ: фоновый мотив ---------------- */
+.coldchain-field {
+  position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+}
+.coldchain-field svg { width: 100%; height: 100%; }
+
+/* ---------------- ШАПКА ---------------- */
+header.site-header {
+  position: sticky; top: 0; z-index: 40;
+  background: rgba(239, 245, 247, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.header-inner { display: flex; align-items: center; gap: 24px; padding: 14px 24px; }
+.brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.brand-mark { width: 40px; height: 40px; flex-shrink: 0; }
+.brand-name { font-family: var(--font-display); font-weight: 600; font-size: 1.02rem; line-height: 1.2; color: var(--ink); max-width: 230px; }
+
+.main-nav { display: flex; align-items: center; gap: 2px; margin-left: auto; flex-wrap: wrap; }
+.main-nav a { padding: 9px 13px; border-radius: 999px; font-size: 0.9rem; font-weight: 600; color: var(--ink-soft); transition: background 0.15s, color 0.15s; }
+.main-nav a:hover, .main-nav a.is-active { background: var(--accent-soft); color: var(--accent); }
+
+.nav-cta { display: inline-flex; align-items: center; gap: 8px; padding: 11px 20px; border-radius: 999px; background: var(--amber); color: var(--ink); font-weight: 700; font-size: 0.92rem; white-space: nowrap; box-shadow: 0 8px 20px rgba(232, 163, 61, 0.38); transition: transform 0.15s, box-shadow 0.15s; }
+.nav-cta:hover { transform: translateY(-1px); box-shadow: 0 12px 26px rgba(232, 163, 61, 0.46); }
+
+.nav-burger { display: none; flex-direction: column; gap: 4px; padding: 8px; }
+.nav-burger span { width: 22px; height: 2px; background: var(--ink); border-radius: 2px; }
+.nav-mobile-panel { display: none; }
+
+/* ---------------- ФУТЕР ---------------- */
+footer { background: var(--ink); color: rgba(239, 245, 247, 0.86); margin-top: 80px; }
+.footer-inner { padding: 52px 24px 30px; display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 36px; }
+footer h4 { font-family: var(--font-display); color: #fff; font-size: 1rem; margin-bottom: 14px; }
+footer a { color: rgba(239, 245, 247, 0.78); }
+footer a:hover { color: var(--amber); }
+.footer-links { display: flex; flex-direction: column; gap: 9px; font-size: 0.92rem; }
+.footer-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.footer-brand .brand-mark { width: 34px; height: 34px; }
+.footer-license { font-size: 0.85rem; color: rgba(239, 245, 247, 0.6); line-height: 1.6; margin-top: 10px; font-family: var(--font-mono); }
+.footer-disclaimer { border-top: 1px solid rgba(239, 245, 247, 0.16); padding: 18px 24px 26px; font-size: 0.82rem; color: rgba(239, 245, 247, 0.58); text-align: center; }
+.footer-disclaimer strong { color: rgba(239, 245, 247, 0.85); }
+.footer-bottom { border-top: 1px solid rgba(239, 245, 247, 0.16); padding: 16px 24px; text-align: center; font-size: 0.82rem; color: rgba(239, 245, 247, 0.5); }
+
+/* ---------------- HERO ---------------- */
+.hero { position: relative; padding: 72px 0 64px; overflow: hidden; background: linear-gradient(180deg, var(--frost-deep), var(--frost)); }
+.hero-inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 48px; align-items: center; }
+.hero-lede { font-size: 1.12rem; margin: 18px 0 30px; max-width: 52ch; }
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 9px; padding: 14px 26px; border-radius: 999px; font-weight: 700; font-size: 0.98rem; transition: transform 0.15s, box-shadow 0.15s; }
+.btn-primary { background: var(--amber); color: var(--ink); box-shadow: 0 10px 24px rgba(232, 163, 61, 0.38); }
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 14px 30px rgba(232, 163, 61, 0.46); }
+.btn-ghost { background: transparent; border: 1.5px solid var(--line-strong); color: var(--ink); }
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+.hero-visual { position: relative; aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; padding: 34px 22px; }
+.hero-badge { position: absolute; z-index: 3; background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 14px 18px; font-size: 0.82rem; font-weight: 700; color: var(--ink); display: flex; align-items: center; gap: 10px; white-space: nowrap; max-width: calc(100% - 8px); }
+.hero-badge .dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.hero-photo { width: 100%; border-radius: 20px; overflow: hidden; box-shadow: 0 24px 50px rgba(16,34,44,0.22); position: relative; z-index: 2; border: 6px solid var(--card); background: var(--cold-soft); }
+.hero-photo img { width: 100%; height: auto; display: block; }
+
+.banner-strip { background: var(--ink); color: #fff; padding: 16px 0; overflow: hidden; }
+.banner-strip-track { display: flex; gap: 40px; white-space: nowrap; font-family: var(--font-mono); font-size: 0.95rem; font-weight: 500; letter-spacing: 0.02em; }
+.banner-strip-track span::after { content: '/'; margin-left: 40px; color: var(--amber); }
+
+/* ---------------- TRUST STRIP ---------------- */
+.trust-strip { padding: 56px 0; }
+.trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+.trust-item { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px 22px; text-align: left; }
+.trust-item .num { font-family: var(--font-display); font-size: 2.2rem; color: var(--cold-deep); font-weight: 600; display: block; margin-bottom: 6px; }
+.trust-item p { font-size: 0.92rem; color: var(--ink-soft); }
+
+/* ---------------- CARDS / GRIDS ---------------- */
+.section { padding: 64px 0; }
+.section-head { max-width: 720px; margin-bottom: 40px; }
+.section-head p { margin-top: 12px; font-size: 1.05rem; }
+
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.services-grid-2col { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 980px) { .services-grid-2col { grid-template-columns: 1fr; } }
+.service-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px 24px; transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s; position: relative; overflow: hidden; }
+.service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: transparent; }
+.service-card .glyph { width: 46px; height: 46px; border-radius: 12px; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; color: var(--accent); }
+.service-card h3 { margin-bottom: 8px; }
+.service-card p { font-size: 0.94rem; margin-bottom: 14px; }
+.service-card .go { font-size: 0.85rem; font-weight: 700; color: var(--cold-deep); }
+
+/* ---------------- ЦЕПОЧКА КОНТРОЛЬНЫХ ТОЧЕК (о компании / логистика) --- */
+.chain-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; position: relative; margin: 40px 0; }
+.chain-steps::before { content: ''; position: absolute; top: 23px; left: 10%; right: 10%; height: 2px; background-image: linear-gradient(to right, var(--cold) 50%, transparent 50%); background-size: 14px 2px; z-index: 0; }
+.chain-step { position: relative; z-index: 1; text-align: center; padding: 0 8px; }
+.chain-step .node { width: 46px; height: 46px; border-radius: 50%; background: var(--card); border: 2px solid var(--cold); display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; color: var(--cold-deep); box-shadow: 0 6px 16px rgba(16,34,44,0.08); }
+.chain-step h4 { font-size: 0.88rem; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.chain-step p { font-size: 0.8rem; color: var(--ink-faint); }
+@media (max-width: 900px) {
+  .chain-steps { grid-template-columns: 1fr 1fr; gap: 28px 12px; }
+  .chain-steps::before { display: none; }
+}
+
+/* ---------------- ИНДИКАТОР ТЕМПЕРАТУРЫ (карточка) ---------------- */
+.thermo-card { display: flex; align-items: center; gap: 22px; background: var(--ink); border-radius: 20px; padding: 30px 34px; color: #fff; }
+.thermo-gauge { flex-shrink: 0; width: 56px; }
+.thermo-copy h3 { color: #fff; margin-bottom: 8px; }
+.thermo-copy p { color: rgba(239,245,247,0.8); }
+.thermo-range { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; padding: 7px 14px; border-radius: 999px; background: rgba(232,163,61,0.16); color: var(--amber); font-family: var(--font-mono); font-weight: 700; font-size: 0.88rem; }
+
+.doctor-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 30px; margin-bottom: 22px; display: grid; grid-template-columns: 132px 1fr; gap: 26px; }
+.doctor-card.chief { background: var(--ink); color: rgba(239,245,247,0.92); }
+.doctor-card.chief h3, .doctor-card.chief .role { color: #fff; }
+.doctor-card.chief p { color: rgba(239,245,247,0.78); }
+.doctor-photo { width: 132px; height: 132px; border-radius: 14px; overflow: hidden; background: var(--accent-soft); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.doctor-photo img { width: 100%; height: 100%; object-fit: cover; }
+.doctor-photo .initial { font-family: var(--font-display); font-size: 2.6rem; color: var(--accent); font-weight: 600; }
+
+/* ---------------- DISCLAIMER ---------------- */
+.disclaimer-box { display: flex; gap: 14px; align-items: flex-start; background: var(--alert-soft); border: 1px solid rgba(155, 52, 44, 0.25); border-radius: var(--radius); padding: 18px 20px; margin: 24px 0; }
+.disclaimer-box svg { flex-shrink: 0; color: var(--alert-deep); margin-top: 2px; }
+.disclaimer-box p { color: var(--ink); font-size: 0.92rem; font-weight: 600; margin: 0; }
+.disclaimer-inline { font-size: 0.85rem; color: var(--alert-deep); font-weight: 700; margin-top: 16px; }
+
+/* ---------------- PRICE LIST (аккордеон) ---------------- */
+.price-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+.price-search { flex: 1; min-width: 220px; position: relative; }
+.price-search input { width: 100%; padding: 13px 18px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--card); font-size: 0.95rem; font-family: inherit; }
+.price-search input:focus { border-color: var(--accent); }
+
+.accordion { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; margin-bottom: 14px; background: var(--card); }
+.accordion-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; padding: 18px 22px; text-align: left; background: var(--card); }
+.accordion-head:hover { background: var(--accent-soft); }
+.accordion-head h3 { font-size: 1.05rem; }
+.accordion-head .meta { font-size: 0.82rem; color: var(--ink-faint); font-weight: 600; font-family: var(--font-mono); }
+.accordion-head .chev { transition: transform 0.2s; color: var(--accent); flex-shrink: 0; }
+.accordion.is-open .chev { transform: rotate(180deg); }
+.accordion-body { display: none; border-top: 1px solid var(--line); }
+.accordion.is-open .accordion-body { display: block; }
+.accordion-intro { padding: 14px 22px 0; font-size: 0.9rem; color: var(--ink-soft); }
+
+.price-table { width: 100%; border-collapse: collapse; }
+.price-table tr { border-top: 1px solid var(--line); }
+.price-table tr:first-child { border-top: none; }
+.price-table td { padding: 13px 22px; font-size: 0.94rem; vertical-align: top; }
+.price-table td.p-title { color: var(--ink); width: 60%; }
+.price-table td.p-title .p-sub { display: block; font-size: 0.82rem; color: var(--ink-faint); margin-top: 3px; }
+.price-table td.p-maker { color: var(--ink-faint); font-size: 0.85rem; }
+.price-table td.p-price { color: var(--cold-deep); font-weight: 700; text-align: right; white-space: nowrap; font-family: var(--font-mono); }
+.price-table td.p-price.is-out { color: var(--alert-deep); font-weight: 600; font-size: 0.85rem; font-family: var(--font-body); }
+.price-table tr.is-hidden { display: none; }
+
+.discount-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 20px; }
+.discount-item { background: var(--amber-soft); border-radius: var(--radius); padding: 18px 20px; }
+.discount-item b { color: var(--ink); display: block; font-size: 1.3rem; font-family: var(--font-display); }
+
+/* ---------------- FORM (заявка) ---------------- */
+.form-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 36px; box-shadow: var(--shadow); max-width: 640px; }
+.field { margin-bottom: 18px; }
+.field label { display: block; font-size: 0.86rem; font-weight: 700; color: var(--ink-soft); margin-bottom: 7px; }
+.field input, .field select, .field textarea { width: 100%; padding: 13px 16px; border-radius: 10px; border: 1.5px solid var(--line); background: var(--frost); font-family: inherit; font-size: 0.96rem; color: var(--ink); }
+.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--accent); background: #fff; }
+.field textarea { resize: vertical; min-height: 90px; }
+.field-check { display: flex; align-items: flex-start; gap: 10px; font-size: 0.86rem; color: var(--ink-soft); }
+.field-check input { width: auto; margin-top: 3px; }
+.field-check a { color: var(--accent); font-weight: 700; }
+.form-msg { margin-top: 14px; font-size: 0.9rem; font-weight: 600; min-height: 20px; }
+.form-msg.ok { color: var(--cold-deep); }
+.form-msg.err { color: var(--alert-deep); }
+
+/* ---------------- CONTACT ---------------- */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+.contact-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; margin-bottom: 16px; }
+.contact-card h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-faint); margin-bottom: 8px; font-family: var(--font-mono); }
+.contact-card .value { font-size: 1.15rem; font-weight: 700; color: var(--ink); }
+.map-frame { width: 100%; height: 420px; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); }
+.map-frame iframe { width: 100%; height: 100%; border: 0; }
+.schedule-table { width: 100%; border-collapse: collapse; }
+.schedule-table td { padding: 12px 0; border-top: 1px solid var(--line); font-size: 0.92rem; }
+.schedule-table tr:first-child td { border-top: none; }
+.schedule-table td:first-child { font-weight: 700; color: var(--ink); }
+.schedule-table td:last-child { color: var(--ink-soft); text-align: right; }
+
+/* ---------------- SPLIT LAYOUT ---------------- */
+.split-layout { display: grid; grid-template-columns: 1.3fr 0.9fr; gap: 48px; align-items: start; }
+@media (max-width: 900px) {
+  .split-layout { grid-template-columns: 1fr; }
+}
+
+/* ---------------- PAGE HEADER (внутренние страницы) ---------------- */
+.page-header { padding: 56px 0 40px; position: relative; }
+.page-header .eyebrow { margin-bottom: 10px; }
+.page-header p.lede { margin-top: 16px; font-size: 1.05rem; max-width: 62ch; }
+.breadcrumb { font-size: 0.85rem; color: var(--ink-faint); margin-bottom: 18px; }
+.breadcrumb a { color: var(--accent); font-weight: 600; }
+
+.legal-body { max-width: 760px; padding-bottom: 60px; }
+.legal-body h2 { margin: 28px 0 12px; font-size: 1.3rem; }
+.legal-body p, .legal-body ul { margin-bottom: 14px; font-size: 0.96rem; }
+.legal-body ul { padding-left: 20px; }
+.todo-note { background: var(--amber-soft); border: 1px dashed var(--amber-deep); border-radius: 10px; padding: 14px 18px; font-size: 0.88rem; margin-bottom: 24px; color: var(--ink); }
+
+.body-rich p { margin-bottom: 14px; white-space: pre-line; }
+.body-rich strong { color: var(--ink); }
+
+.steps-list { counter-reset: step; display: grid; gap: 18px; }
+.step-item { display: flex; gap: 20px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+.step-item .step-num { counter-increment: step; font-family: var(--font-display); font-size: 1.6rem; font-weight: 600; color: var(--amber-deep); flex-shrink: 0; width: 44px; }
+.step-item .step-num::before { content: counter(step, decimal-leading-zero); }
+
+.quote-block { border-left: 4px solid var(--amber); padding: 6px 0 6px 24px; margin: 28px 0; font-family: var(--font-display); font-size: 1.25rem; font-style: italic; color: var(--ink); }
+
+.review-item { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; margin-bottom: 16px; }
+.review-item .review-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; flex-wrap: wrap; gap: 8px; }
+.review-item .review-author { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; color: var(--ink); }
+.review-item time { font-size: 0.8rem; color: var(--ink-faint); font-family: var(--font-mono); }
+
+.license-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.license-item { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.license-item img { width: 100%; height: auto; display: block; }
+.license-item .cap { padding: 12px 16px; font-size: 0.85rem; color: var(--ink-faint); font-family: var(--font-mono); border-top: 1px solid var(--line); }
+
+.requisites-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+.requisites-table td { padding: 11px 0; border-top: 1px solid var(--line); font-size: 0.92rem; }
+.requisites-table tr:first-child td { border-top: none; }
+.requisites-table td:first-child { color: var(--ink-faint); width: 42%; }
+.requisites-table td:last-child { color: var(--ink); font-weight: 600; font-family: var(--font-mono); }
+
+/* ---------------- ADMIN LINK / MISC ---------------- */
+.chief-quote-card { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 40px; align-items: center; background: var(--ink); border-radius: 24px; padding: 44px; color: #fff; }
+.chief-quote-card p { color: rgba(239,245,247,0.85); }
+.chief-quote-card .sign { margin-top: 18px; font-family: var(--font-display); font-size: 1.1rem; color: var(--amber); }
+
+.cta-band { background: linear-gradient(135deg, var(--cold-deep), #1c3a49); border-radius: 24px; padding: 48px; color: #fff; text-align: center; }
+.cta-band h2 { color: #fff; }
+.cta-band p { color: rgba(239,245,247,0.82); margin: 14px auto 26px; max-width: 52ch; }
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 980px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-visual { order: -1; max-width: 340px; margin: 0 auto; }
+  .trust-grid { grid-template-columns: repeat(2, 1fr); }
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .contact-grid { grid-template-columns: 1fr; }
+  .chief-quote-card { grid-template-columns: 1fr; padding: 30px; }
+  .thermo-card { flex-direction: column; text-align: center; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+  .license-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 680px) {
+  .main-nav { display: none; }
+  .nav-burger { display: flex; }
+  .nav-cta { display: none; }
+  .header-inner { padding: 12px 16px; }
+  .brand-name { display: none; }
+  .nav-mobile-panel.is-open { display: block; padding: 10px 16px 18px; border-top: 1px solid var(--line); }
+  .nav-mobile-panel .nav-mobile-links { display: flex; flex-direction: column; gap: 2px; margin-bottom: 14px; }
+  .nav-mobile-panel a { padding: 12px 6px; font-weight: 600; border-bottom: 1px solid var(--line); }
+  .trust-grid { grid-template-columns: 1fr 1fr; }
+  .services-grid { grid-template-columns: 1fr; }
+  .discount-list { grid-template-columns: 1fr; }
+  .chain-steps { grid-template-columns: 1fr 1fr; }
+  .footer-inner { grid-template-columns: 1fr; padding: 40px 20px 20px; }
+  .price-table td { padding: 12px 16px; }
+  .price-table td.p-title { width: auto; }
+  .accordion-head { padding: 15px 16px; }
+  .wrap { padding: 0 16px; }
+  .form-card { padding: 24px 20px; }
+  .chief-quote-card { padding: 22px; border-radius: 16px; }
+  .cta-band { padding: 30px 22px; border-radius: 16px; }
+  h1 { font-size: 2rem; }
+  .hero { padding: 40px 0 44px; }
+  .section { padding: 44px 0; }
+}
