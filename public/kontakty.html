@@ -35,10 +35,6 @@
           <p style="font-size:0.85rem; color:var(--ink-faint); margin-top:6px;">Дополнительно перед обращением звоните по телефону для уточнения наличия препарата.</p>
         </div>
         <div class="contact-card">
-          <h4>Email</h4>
-          <p class="value" style="font-size:1rem;"><a id="emailLink" href="#"></a></p>
-        </div>
-        <div class="contact-card">
           <h4>Режим работы</h4>
           <p style="font-size:0.95rem;" id="workHours"></p>
           <p style="font-size:0.85rem; color:var(--ink-faint); margin-top:6px;" id="workHoursDoctor"></p>
@@ -73,9 +69,6 @@ async function loadContacts() {
   const phoneLink = document.getElementById('phoneLink');
   phoneLink.textContent = settings.phone_display || settings.phone || '';
   phoneLink.href = 'tel:' + (settings.phone || '').replace(/[^\d+]/g, '');
-  const emailLink = document.getElementById('emailLink');
-  emailLink.textContent = settings.email || '';
-  emailLink.href = 'mailto:' + (settings.email || '');
   document.getElementById('workHours').textContent = settings.work_hours || '';
   document.getElementById('workHoursDoctor').textContent = settings.work_hours_doctor || '';
   document.getElementById('minzdravPhone').textContent = settings.regulator_minzdrav_phone || '';

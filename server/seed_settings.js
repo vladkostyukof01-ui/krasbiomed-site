@@ -10,7 +10,6 @@ const settings = {
   phone: '(391) 211-07-45',
   phone_display: '(391) 211-07-45, 211-45-15',
   phone_extra: '211-07-20',
-  email: 'krasbiomed@mail.ru',
   work_hours: '9:00–17:00 ежедневно, кроме субботы и воскресенья',
   work_hours_doctor: 'приём врача: 9:30–16:00',
   legal_address: 'г. Красноярск, ул. Урицкого, 120, офис 2, 1 этаж',
