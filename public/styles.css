@@ -93,6 +93,20 @@ html { scroll-behavior: smooth; }
 a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
 
+/* ---------------- SCROLL REVEAL ---------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+.reveal-stagger { transition-duration: 0.65s; }
+.reveal-disabled .reveal { opacity: 1; transform: none; transition: none; }
+.chain-step { opacity: 0; transform: translateY(18px); transition: opacity 0.65s ease, transform 0.65s ease; transition-delay: var(--reveal-delay, 0ms); }
+.chain-step.is-visible { opacity: 1; transform: translateY(0); }
+.reveal-disabled .chain-step { opacity: 1; transform: none; transition: none; }
+
 body {
   min-height: 100vh;
   display: flex;

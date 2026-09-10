@@ -25,8 +25,8 @@
 
   <section class="section" style="padding-top:0;">
     <div class="wrap split-layout">
-      <div class="body-rich" id="svcBody"></div>
-      <div class="form-card" style="padding:28px; box-shadow:none; background:var(--accent-soft); border:none;">
+      <div class="body-rich reveal" id="svcBody"></div>
+      <div class="form-card reveal" style="padding:28px; box-shadow:none; background:var(--accent-soft); border:none; --reveal-delay:100ms;">
         <h3 style="margin-bottom:14px;">Остались вопросы?</h3>
         <p style="color:var(--ink-soft); margin-bottom:18px;">Оставьте заявку — уточним детали и свяжемся с вами.</p>
         <a href="/zayavka" class="btn btn-primary" style="width:100%; justify-content:center;">Оставить заявку</a>
@@ -36,7 +36,7 @@
 
   <section class="section">
     <div class="wrap">
-      <div class="disclaimer-box">
+      <div class="disclaimer-box reveal">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.29 3.86l-8.18 14.18A2 2 0 0 0 3.9 21h16.2a2 2 0 0 0 1.79-2.96L13.71 3.86a2 2 0 0 0-3.42 0Z"/></svg>
         <p>Имеются противопоказания. Необходима консультация специалиста.</p>
       </div>
@@ -47,6 +47,7 @@
 <div id="footerPlaceholder"></div>
 
 <script src="/common.js"></script>
+<script src="/reveal.js"></script>
 <script>
 async function loadService() {
   const slug = window.location.pathname.split('/').pop();

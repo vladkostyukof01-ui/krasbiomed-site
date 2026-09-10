@@ -52,16 +52,16 @@
 
   <section class="trust-strip">
     <div class="wrap trust-grid">
-      <div class="trust-item"><span class="num">2005</span><p>год начала работы на красноярском рынке иммунобиологической продукции</p></div>
-      <div class="trust-item"><span class="num">2</span><p>бессрочные лицензии — на медицинскую и на фармацевтическую деятельность</p></div>
-      <div class="trust-item"><span class="num">15</span><p>групп вакцин в актуальном прейскуранте — от клещевого энцефалита до ВПЧ</p></div>
-      <div class="trust-item"><span class="num">+2…+8°C</span><p>температурный диапазон холодовой цепи, который мы контролируем на каждом этапе</p></div>
+      <div class="trust-item reveal"><span class="num">2005</span><p>год начала работы на красноярском рынке иммунобиологической продукции</p></div>
+      <div class="trust-item reveal" style="--reveal-delay:70ms;"><span class="num">2</span><p>бессрочные лицензии — на медицинскую и на фармацевтическую деятельность</p></div>
+      <div class="trust-item reveal" style="--reveal-delay:140ms;"><span class="num">15</span><p>групп вакцин в актуальном прейскуранте — от клещевого энцефалита до ВПЧ</p></div>
+      <div class="trust-item reveal" style="--reveal-delay:210ms;"><span class="num">+2…+8°C</span><p>температурный диапазон холодовой цепи, который мы контролируем на каждом этапе</p></div>
     </div>
   </section>
 
   <section class="section">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head reveal">
         <span class="eyebrow">Чем мы занимаемся</span>
         <h2>Пять направлений работы с иммунобиологическими препаратами</h2>
         <p>От приёма в собственном прививочном кабинете до оптовых поставок с соблюдением температурного режима.</p>
@@ -72,7 +72,7 @@
 
   <section class="section">
     <div class="wrap">
-      <div class="thermo-card">
+      <div class="thermo-card reveal">
         <svg class="thermo-gauge" viewBox="0 0 56 160" fill="none">
           <rect x="20" y="8" width="16" height="120" rx="8" stroke="#EFF5F7" stroke-opacity="0.35" stroke-width="2"/>
           <rect x="24" y="60" width="8" height="50" rx="4" fill="#E8A33D" fill-opacity="0.85"/>
@@ -94,7 +94,7 @@
 
   <section class="section">
     <div class="wrap">
-      <div class="chief-quote-card">
+      <div class="chief-quote-card reveal">
         <div>
           <span class="eyebrow" style="color:var(--amber);">О компании</span>
           <h2 style="color:#fff;">ООО «КрасБиоМед-Иммуно»</h2>
@@ -110,7 +110,7 @@
 
   <section class="section">
     <div class="wrap">
-      <div class="cta-band">
+      <div class="cta-band reveal">
         <span class="eyebrow" style="color:var(--amber);">Заявка</span>
         <h2>Нужна консультация по вакцинации или оптовой поставке?</h2>
         <p>Оставьте заявку — уточним наличие препарата, поможем с выбором вакцины или согласуем условия оптовой поставки с соблюдением холодовой цепи.</p>
@@ -123,6 +123,7 @@
 <div id="footerPlaceholder"></div>
 
 <script src="/common.js"></script>
+<script src="/reveal.js"></script>
 <script>
 renderColdchainField('#heroColdchain', { color: 'var(--ink)', dotColor: 'var(--amber)' });
 

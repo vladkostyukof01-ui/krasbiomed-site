@@ -25,21 +25,21 @@
   <section class="section" style="padding-top:0;">
     <div class="wrap contact-grid">
       <div>
-        <div class="contact-card">
+        <div class="contact-card reveal">
           <h4>Адрес</h4>
           <p class="value" id="addr"></p>
         </div>
-        <div class="contact-card">
+        <div class="contact-card reveal" style="--reveal-delay:60ms;">
           <h4>Телефон</h4>
           <p class="value"><a id="phoneLink" href="#"></a></p>
           <p style="font-size:0.85rem; color:var(--ink-faint); margin-top:6px;">Дополнительно перед обращением звоните по телефону для уточнения наличия препарата.</p>
         </div>
-        <div class="contact-card">
+        <div class="contact-card reveal" style="--reveal-delay:120ms;">
           <h4>Режим работы</h4>
           <p style="font-size:0.95rem;" id="workHours"></p>
           <p style="font-size:0.85rem; color:var(--ink-faint); margin-top:6px;" id="workHoursDoctor"></p>
         </div>
-        <div class="contact-card">
+        <div class="contact-card reveal" style="--reveal-delay:180ms;">
           <h4>Контролирующие органы</h4>
           <table class="schedule-table">
             <tr><td>Минздрав Красноярского края</td><td id="minzdravPhone"></td></tr>
@@ -47,7 +47,7 @@
           </table>
         </div>
       </div>
-      <div>
+      <div class="reveal" style="--reveal-delay:100ms;">
         <div class="map-frame">
           <iframe id="mapFrame" src="" loading="lazy" title="Карта — расположение офиса ООО «КрасБиоМед-Иммуно»"></iframe>
         </div>
@@ -62,6 +62,7 @@
 <div id="footerPlaceholder"></div>
 
 <script src="/common.js"></script>
+<script src="/reveal.js"></script>
 <script>
 async function loadContacts() {
   const settings = await loadSettingsGlobal();

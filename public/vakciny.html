@@ -25,7 +25,7 @@
 
   <section class="section" style="padding-top:0;">
     <div class="wrap">
-      <div class="price-toolbar">
+      <div class="price-toolbar reveal">
         <div class="price-search">
           <input type="text" id="priceSearch" placeholder="Найти вакцину, например «клещ» или «гепатит»…">
         </div>
@@ -37,26 +37,26 @@
 
   <section class="section">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head reveal">
         <span class="eyebrow">Условия приёма</span>
         <h2>Как записаться на вакцинацию</h2>
       </div>
       <div class="steps-list">
-        <div class="step-item">
+        <div class="step-item reveal">
           <div class="step-num"></div>
           <div>
             <h3>Позвоните заранее</h3>
             <p>Уточните наличие нужного препарата по телефону: (391) 211-07-45, 211-45-15, 211-07-20 — или напишите на krasbiomed@mail.ru.</p>
           </div>
         </div>
-        <div class="step-item">
+        <div class="step-item reveal" style="--reveal-delay:80ms;">
           <div class="step-num"></div>
           <div>
             <h3>Пройдите осмотр врача</h3>
             <p>Перед вакцинацией необходим осмотр — его можно пройти в поликлинике по месту жительства по системе ОМС, либо на месте в часы приёма врача.</p>
           </div>
         </div>
-        <div class="step-item">
+        <div class="step-item reveal" style="--reveal-delay:160ms;">
           <div class="step-num"></div>
           <div>
             <h3>Возьмите документы</h3>
@@ -69,7 +69,7 @@
 
   <section class="section">
     <div class="wrap">
-      <div class="disclaimer-box">
+      <div class="disclaimer-box reveal">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.29 3.86l-8.18 14.18A2 2 0 0 0 3.9 21h16.2a2 2 0 0 0 1.79-2.96L13.71 3.86a2 2 0 0 0-3.42 0Z"/></svg>
         <p>Имеются противопоказания. Необходима консультация специалиста.</p>
       </div>
@@ -80,6 +80,7 @@
 <div id="footerPlaceholder"></div>
 
 <script src="/common.js"></script>
+<script src="/reveal.js"></script>
 <script>
 let PRICE_DATA = [];
 

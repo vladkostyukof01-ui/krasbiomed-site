@@ -24,8 +24,8 @@
 
   <section class="section" style="padding-top:0;">
     <div class="wrap split-layout">
-      <div class="body-rich" id="aboutText" style="font-size:1.05rem;"></div>
-      <div class="form-card" style="padding:28px; box-shadow:none; background:var(--accent-soft); border:none;">
+      <div class="body-rich reveal" id="aboutText" style="font-size:1.05rem;"></div>
+      <div class="form-card reveal" style="padding:28px; box-shadow:none; background:var(--accent-soft); border:none; --reveal-delay:100ms;">
         <h3 style="margin-bottom:14px;">Наш подход</h3>
         <p id="missionText" style="color:var(--ink-soft);"></p>
       </div>
@@ -34,7 +34,7 @@
 
   <section class="section">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head reveal">
         <span class="eyebrow">Холодовая цепь</span>
         <h2>Пять контрольных точек — от завода до пациента</h2>
         <p>Каждая партия иммунобиологического препарата проходит непрерывный температурный контроль на всех этапах пути.</p>
@@ -71,17 +71,17 @@
 
   <section class="section">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head reveal">
         <span class="eyebrow">Разрешительные документы</span>
         <h2>Работаем по двум бессрочным лицензиям</h2>
       </div>
       <div class="services-grid-2col services-grid">
-        <div class="service-card">
+        <div class="service-card reveal">
           <div class="glyph"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div>
           <h3>Медицинская деятельность</h3>
           <p id="licMedLine"></p>
         </div>
-        <div class="service-card">
+        <div class="service-card reveal" style="--reveal-delay:80ms;">
           <div class="glyph"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div>
           <h3>Фармацевтическая деятельность</h3>
           <p id="licPharmaLine"></p>
@@ -93,11 +93,11 @@
 
   <section class="section">
     <div class="wrap">
-      <div class="disclaimer-box">
+      <div class="disclaimer-box reveal">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.29 3.86l-8.18 14.18A2 2 0 0 0 3.9 21h16.2a2 2 0 0 0 1.79-2.96L13.71 3.86a2 2 0 0 0-3.42 0Z"/></svg>
         <p>Имеются противопоказания. Необходима консультация специалиста.</p>
       </div>
-      <div class="cta-band">
+      <div class="cta-band reveal">
         <span class="eyebrow" style="color:var(--amber);">Сотрудничество</span>
         <h2>Работаете с аптечной сетью или медицинским учреждением?</h2>
         <p>Расскажите о задаче — подберём препараты и условия оптовой поставки с соблюдением холодовой цепи.</p>
@@ -110,6 +110,7 @@
 <div id="footerPlaceholder"></div>
 
 <script src="/common.js"></script>
+<script src="/reveal.js"></script>
 <script>
 async function loadAbout() {
   const settings = await loadSettingsGlobal();

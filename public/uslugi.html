@@ -31,7 +31,7 @@
 
   <section class="section">
     <div class="wrap">
-      <div class="cta-band">
+      <div class="cta-band reveal">
         <span class="eyebrow" style="color:var(--amber);">Не нашли нужную услугу?</span>
         <h2>Позвоните нам или оставьте заявку</h2>
         <p>Уточним наличие препарата, поможем подобрать вакцину или согласуем условия оптовой поставки.</p>
@@ -44,6 +44,7 @@
 <div id="footerPlaceholder"></div>
 
 <script src="/common.js"></script>
+<script src="/reveal.js"></script>
 <script>
 async function loadServices() {
   const services = await fetch('/api/services').then(r => r.json());
